@@ -7,13 +7,13 @@ networks:
 services:
   was1:
     image: sibaru/helloweb:latest
-	container_name: was1
+    container_name: was1
     networks:
       - kosa_network
 
   was2:
     image: sibaru/helloweb:latest
-	container_name: was2
+    container_name: was2
     networks:
       - kosa_network
 
