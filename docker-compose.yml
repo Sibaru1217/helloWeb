@@ -1,34 +1,22 @@
-#version: 3.1
+version: '3.1'
 
-# 사설망 network 생성
-network:
+networks:
   kosa_network:
     driver: bridge
 
-		
-#서비스 선언
-service:
+services:
   was1:
     image: sibaru/helloweb:latest
-	networks:
-	 -kosa_network
-	
-	 
-service:
-  was1:
-    image: sibaru/helloweb:latest
-      networks:
-	    -kosa_network
+    networks:
+      - kosa_network
 
-		
-nginx:
-  image: nginx:latest
- 	ports:
-		-80:80 
-	volumes:
-		~/nginx/nginx.conf:/etc/nginx/nginx.conf
-	networks:
-		kosa_network
-	depends_on:
-		was1
-		was2
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - /home/ubuntu/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - kosa_network
+    depends_on:
+      - was1
