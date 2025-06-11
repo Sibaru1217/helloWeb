@@ -1,4 +1,4 @@
-version: '3.1'
+#version: '3.1'
 
 networks:
   kosa_network:
@@ -7,6 +7,13 @@ networks:
 services:
   was1:
     image: sibaru/helloweb:latest
+	container_name: was1
+    networks:
+      - kosa_network
+
+  was2:
+    image: sibaru/helloweb:latest
+	container_name: was2
     networks:
       - kosa_network
 
@@ -15,8 +22,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /home/ubuntu/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
     networks:
       - kosa_network
     depends_on:
       - was1
+      - was2
