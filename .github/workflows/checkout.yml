@@ -18,11 +18,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Grant execute permission to gradlew
+        run: chmod +x ./gradlew
+
       - name: Build with Gradle
         run: ./gradlew bootJar
 
       - name: Docker image build
-        run: docker build -t masungil/hello-web:latest .
+        run: docker build -t sibaru/helloWeb:latest .
 
       - name: Docker Hub login
         uses: docker/login-action@v1
@@ -31,4 +34,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
 
       - name: Docker Hub push
-        run: docker push masungil/hello-web:latest
+        run: docker push sibaru/helloWeb:latest
