@@ -4,4 +4,8 @@ jobs:
   checkout:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: ls -al
+      - run: ls -al our-source
+      
+      
